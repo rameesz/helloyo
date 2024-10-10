@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Fruit Set</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        /* Custom background */
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color: #f0f4f5; /* Light background */
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            margin-top: 50px; /* Spacing from top */
+        }
+
+        header {
+            background-color: #343a40; /* Dark header background */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #28a745; /* Green accent color */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .navbar-custom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-custom .nav-links {
+            display: flex;
+            flex-direction: row;
+        }
+
+        h1,
+        h2 {
+            color: #343a40; /* Dark text */
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            .navbar-custom {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar-custom .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar-custom .nav-links li {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header>
+        <div class="navbar-custom">
+            <h1 class="mb-0">Fruit Set Dashboard</h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="{% url 'add_fruit_set' %}">Add Fruit Set</a></li>
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Form Section -->
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="form-container" style="animation: fadeInUp 1s;">
+            <h1 class="display-5 text-center text-dark mb-4" style="animation: fadeInDown 1s;">Add a New Set of Fruits</h1>
+
+            <!-- Form -->
+            <form method="POST" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form.as_p }}
+                </div>
+                <button type="submit" class="btn btn-success btn-lg w-100">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Check if the element you want to manipulate exists
+            const myElement = document.querySelector('.my-class'); // Replace with your actual class/ID if needed
+            if (myElement) {
+                myElement.classList.add('some-class'); // Example operation
+            } else {
+                console.warn("Element with the specified selector not found."); // Debugging log
+            }
+        });
+    </script>
+</body>
+
+</html>

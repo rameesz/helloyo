@@ -1,0 +1,190 @@
+<!-- fruits/templates/fruits/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Set Dashboard</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        /* Custom background and typography */
+        body {
+            background-color: #f0f4f5; /* Light dashboard background */
+            font-family: 'Roboto', sans-serif; /* Use a modern font */
+        }
+
+        header {
+            background-color: #343a40; /* Dark header background */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #28a745; /* Green accent color */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .dashboard-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        h1,
+        h2 {
+            color: #343a40; /* Dark text */
+        }
+
+        h2 {
+            border-bottom: 2px solid #28a745; /* Green accent */
+            padding-bottom: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Table Styling */
+        table {
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            text-align: center;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #28a745; /* Green background for headers */
+            color: white;
+        }
+
+        td {
+            background-color: #f8f9fa; /* Light grey for table rows */
+        }
+
+        /* Custom button styling */
+        .btn-custom {
+            background-color: #28a745; /* Green background */
+            color: white;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-weight: bold;
+            border: none;
+            margin-top: 20px;
+        }
+
+        .btn-custom:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Fruit Set Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'add_fruit_set' %}">Add Fruit Set</a></li>
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Section: Search Form -->
+        <section class="dashboard-section">
+            <h2>Search for a Fruit Set</h2>
+            <form action="{% url 'search_fruit_set' %}" method="POST" class="row g-3">
+                {% csrf_token %}
+                <div class="col-md-6">
+                    <label for="fruit1" class="form-label">Fruit 1</label>
+                    <input type="text" class="form-control" name="fruit1" id="fruit1" placeholder="Enter first fruit name">
+                </div>
+                <div class="col-md-6">
+                    <label for="fruit2" class="form-label">Fruit 2</label>
+                    <input type="text" class="form-control" name="fruit2" id="fruit2" placeholder="Enter second fruit name">
+                </div>
+                <div class="col-md-6">
+                    <label for="fruit3" class="form-label">Fruit 3</label>
+                    <input type="text" class="form-control" name="fruit3" id="fruit3" placeholder="Enter third fruit name">
+                </div>
+                <div class="col-md-6">
+                    <label for="fruit4" class="form-label">Fruit 4</label>
+                    <input type="text" class="form-control" name="fruit4" id="fruit4" placeholder="Enter fourth fruit name">
+                </div>
+                <div class="col-md-6">
+                    <label for="fruit5" class="form-label">Fruit 5</label>
+                    <input type="text" class="form-control" name="fruit5" id="fruit5" placeholder="Enter fifth fruit name">
+                </div>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-custom">Search</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Section: Recent Fruit Sets -->
+        <section class="dashboard-section">
+            <h2>Recent Fruit Sets</h2>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Fruit 1</th>
+                        <th>Fruit 2</th>
+                        <th>Fruit 3</th>
+                        <th>Fruit 4</th>
+                        <th>Fruit 5</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fruit_set in recent_fruit_sets %}
+                    <tr>
+                        <td>{{ fruit_set.fruit1 }}</td>
+                        <td>{{ fruit_set.fruit2 }}</td>
+                        <td>{{ fruit_set.fruit3 }}</td>
+                        <td>{{ fruit_set.fruit4 }}</td>
+                        <td>{{ fruit_set.fruit5 }}</td>
+                        <td>{{ fruit_set.result }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
